@@ -33,7 +33,6 @@ Click Commit changes at the bottom of the page to save them.
 The Python Script to Use
 Make sure your generate_mcqs.py contains this exact universal version, which handles both Windows/Linux path differences and Excel encoding problems out of the box:
 
-Python
 import pandas as pd
 import random
 import os
@@ -96,8 +95,8 @@ Click the green <> Code button.
 Select the Codespaces tab and click Create codespace on main.
 
 A browser-based version of VS Code will launch. Open the terminal at the bottom and type:
-
 Bash
+
 pip install pandas python-docx
 python generate_mcqs.py
 
@@ -110,11 +109,13 @@ Open your command prompt/terminal and clone your repository down:
 
 Bash
 git clone https://github.com/your-username/mcq-generator.git
+
 Open that folder, open your terminal, install your modules, and run the file:
 
 Bash
 pip install pandas python-docx
 python generate_mcqs.py
+
 Line-by-Line Explanation of the Universal Upgrades
 os.path.abspath(__file__): Finds the explicit, unique file system path of where generate_mcqs.py sits. This guarantees it works seamlessly whether executed inside a local Windows folder, a Linux server, or a GitHub cloud environment.
 
