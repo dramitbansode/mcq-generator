@@ -1,0 +1,34 @@
+import pandas as pd
+import random
+from docx import Document
+
+# 1. Load data
+df = pd.read_csv(r'D:\MBBS\Batch 2024\Second term\Questions.csv')
+
+def create_full_shuffled_paper(df, version_num):
+    # 2. Shuffle question order
+    shuffled_df = df.sample(frac=1).reset_index(drop=True)
+    
+    doc = Document()
+    doc.add_heading(f'MCQ Paper - Version {version_num}', 0)
+    
+    for i, row in shuffled_df.iterrows():
+        # 3. Add Question
+        p = doc.add_paragraph(style='List Number')
+        p.add_run(f"{row['Question']}")
+        
+        # 4. Extract and shuffle the sequence of options
+        options = [row['OptionA'], row['OptionB'], row['OptionC'], row['OptionD']]
+        random.shuffle(options)  # This reorders the list randomly
+        
+        # 5. Print options with static labels A, B, C, D
+        labels = ['A', 'B', 'C', 'D']
+        for label, opt_text in zip(labels, options):
+            doc.add_paragraph(f"{label}) {opt_text}")
+        
+        doc.add_paragraph() # Spacer
+
+    doc.save(f'MCQ_Full_Shuffle_V{version_num}.docx')
+
+for i in range(1, 6):
+    create_full_shuffled_paper(df, i)
